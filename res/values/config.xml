@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Where to store the wallpapers (just the folder name) -->
+    <string name="config_wallpaper_sdcard_dl_location">BlissPop</string>
+
+    <!-- Directory to download wallpapers to on external storage. Leave blank for "/sdcard/" -->
+    <string name="config_wallpaper_download_loc"></string>
+
+    <!-- url to the wallpaper manifest -->
+    <string name="config_wallpaper_manifest_url">http://darkxshadows.net/blisspop/wallpapers/wallpaper_manifest.xml</string>
+
+</resources>

@@ -1,0 +1,24 @@
+<resources>
+
+    <string name="app_name">BlissPop Wallpapers</string>
+    <string name="title_activity_wallpaper">BlissPop Wallpapers</string>
+    <string name="back">Previous</string>
+    <string name="next">Next</string>
+    <string name="page">Page: </string>
+    <string name="set_wallpaper">Set as Wallpaper</string>
+    <string name="save_wallpaper">Save to Storage</string>
+    <string name="downloading">Downloading…</string>
+    <string name="wait">Please wait</string>
+    <string name="set">Wallpaper set!</string>
+    <string name="saved">Wallpaper saved to</string>
+    <string name="jump">Jump to Page</string>
+    <string name="jump2">Jump to Page:</string>
+    <string name="about">About</string>
+    <string name="wars">Wallpaper Wars</string>
+    <string name="vote">Vote!</string>
+    <string name="wallpaper">wallpaper</string>
+    <string name="setting_wallpaper">Setting wallpaper…</string>
+    <string name="category_name">Category Name</string>
+    <string name="choose_category">Choose category</string>
+
+</resources>

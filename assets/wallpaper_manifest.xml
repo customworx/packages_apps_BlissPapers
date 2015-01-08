@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wallpapers>
+
+<!--
+    Wallpapers accept:
+    url="<url of wallpaper>"  [REQUIRED]
+	name="<name of wallpaper>" 
+	thumbUrl="<url of thumbnail>"
+	author="<wallpaper author>" [REQUIRED] 
+-->
+
+	<category name ="blisspop">
+        <wallpaper
+            author="Skyliner33v"
+			name="Paranoid BlissPop"
+            url="http://darkxshadows.net/blisspop/wallpapers/paranoid_blisspop.jpg" />
+
+        <wallpaper
+            author="Skyliner33v"
+			name="Bliss Material 1"
+            url="http://darkxshadows.net/blisspop/wallpapers/bliss_material_wall_1.png" />
+
+        <wallpaper
+            author="Skyliner33v"
+			name="Bliss Material 2"
+            url="http://darkxshadows.net/blisspop/wallpapers/bliss_material_wall_2.png" />
+
+        <wallpaper
+            author="Skyliner33v"
+			name="Bliss Material 3"
+            url="http://aokp.co/wallpapers/bliss_material_wall_3.png"/>
+			
+			
+	</category>
+</wallpapers>
