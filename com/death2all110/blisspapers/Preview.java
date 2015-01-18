@@ -164,7 +164,7 @@ public class Preview extends Activity {
         switch (id) {
             case DIALOG_DOWNLOAD_PROGRESS:
                 mProgressDialog = new ProgressDialog(this);
-                mProgressDialog.setMessage(getResources().getString(com.death2all110.blisspapers.R.string.setting_wallpaper));
+                mProgressDialog.setMessage(getResources().getString(com.death2all110.blisspapers.R.string.downloading_wallpaper));
                 mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                 mProgressDialog.setIndeterminate(true);
                 mProgressDialog.setCancelable(true);

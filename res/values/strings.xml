@@ -15,10 +15,9 @@
     <string name="jump2">Jump to Page:</string>
     <string name="action_about">About</string>
     <string name="title_activity_about">About BlissPop Wallpapers</string>
-    <string name="wars">Wallpaper Wars</string>
-    <string name="vote">Vote!</string>
     <string name="wallpaper">wallpaper</string>
-    <string name="setting_wallpaper">Setting wallpaper…</string>
+    <string name="setting_wallpaper">Setting wallpaper...</string>
+    <string name="downloading_wallpaper">Saving wallpaper...</string>
     <string name="category_name">Category Name</string>
     <string name="choose_category">Choose category</string>
     <string name="about_text">Welcome to BlissPop Wallpapers. \n\nThis app was forked from AOKP\'s SwagPapers and was updated to take advantage of Lollipop\'s Material theme. \n\nThis app was customized for BlissPop wallpapers and should not be distributed anywhere outside of the BlissPop Rom. \n\nSource files can be found below:\n\nAOKP Swagpapers:\nhttps://github.com/AOKP/packages_wallpapers_SwagPapers_v2\nBlissPop Wallpapers:\nhttps://github.com/death2all110/android_packages_apps_BlissPapers</string>
