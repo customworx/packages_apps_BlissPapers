@@ -12,7 +12,6 @@ public class About extends Activity {
     TextView manufacturerName;
     TextView deviceModel;
     TextView boardName;
-    TextView romVersion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
