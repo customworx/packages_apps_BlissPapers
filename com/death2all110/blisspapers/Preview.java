@@ -58,8 +58,6 @@ public class Preview extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(com.death2all110.blisspapers.R.layout.activity_preview);
 
-        Toolbar ab = (Toolbar) findViewById(R.id.toolbar);
-        setActionBar(ab);
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
         ImageView p = (ImageView) findViewById(com.death2all110.blisspapers.R.id.preView);

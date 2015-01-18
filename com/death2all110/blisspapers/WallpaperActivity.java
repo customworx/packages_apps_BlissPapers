@@ -23,7 +23,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -67,7 +66,6 @@ public class WallpaperActivity extends Activity {
         setContentView(R.layout.activity_wallpaper);
 
 
-
         mLoadingDialog = new ProgressDialog(this);
         mLoadingDialog.setCancelable(false);
         mLoadingDialog.setIndeterminate(true);
@@ -81,17 +79,31 @@ public class WallpaperActivity extends Activity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_about:
+                Intent intent = new Intent(this, About.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         Wallpaper.wallpapersCreated = 0;
     }
 
     protected void loadPreviewFragment() {
-
-        Toolbar ab = (Toolbar) findViewById(R.id.toolbar);
-        setActionBar(ab);
-
-
 
         WallpaperPreviewFragment fragment = new WallpaperPreviewFragment();
         FragmentManager fragmentManager = getFragmentManager();
@@ -115,6 +127,7 @@ public class WallpaperActivity extends Activity {
         ThumbnailView[] thumbs;
         protected int selectedCategory = 0; // *should* be <ALL> wallpapers
 
+
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
@@ -130,7 +143,7 @@ public class WallpaperActivity extends Activity {
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+                                 Bundle savedInstanceState) {
 
             mView = inflater.inflate(com.death2all110.blisspapers.R.layout.activity_wallpaper, container, false);
 
@@ -157,6 +170,7 @@ public class WallpaperActivity extends Activity {
                     previous();
                 }
             });
+
 
             return mView;
 
@@ -222,29 +236,6 @@ public class WallpaperActivity extends Activity {
             }
         }
 
-        public void jumpTo() {
-            // View view = getLayoutInflater().inflate(R.layout.dialog_jumpto,
-            // null);
-            // final EditText e = (EditText) view.findViewById(R.id.pageNumber);
-            // AlertDialog.Builder j = new AlertDialog.Builder(this);
-            // j.setTitle(R.string.jump2);
-            // j.setView(view);
-            // j.setPositiveButton(android.R.string.ok, new
-            // DialogInterface.OnClickListener() {
-            //
-            // public void onClick(DialogInterface dialog, int which) {
-            // skipToPage(Integer.parseInt(e.getText().toString()));
-            // }
-            // });
-            // j.setNegativeButton(android.R.string.no, new
-            // DialogInterface.OnClickListener() {
-            //
-            // public void onClick(DialogInterface dialog, int which) {
-            // dialog.cancel();
-            // }
-            // });
-            // j.create().show();
-        }
 
         protected View getThumbView(int i) {
             if (thumbs != null && thumbs.length > 0)
@@ -261,21 +252,6 @@ public class WallpaperActivity extends Activity {
             return back;
         }
 
-        @Override
-        public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-            super.onCreateOptionsMenu(menu, inflater);
-        }
-
-        public boolean onOptionsItemSelected(MenuItem item) {
-            switch (item.getItemId()) {
-                case com.death2all110.blisspapers.R.id.jump:
-                    jumpTo();
-                    return true;
-                default:
-                    return super.onOptionsItemSelected(item);
-            }
-        }
-
         class ThumbnailCallBack implements UrlImageViewCallback {
 
             Wallpaper wall;
@@ -288,7 +264,7 @@ public class WallpaperActivity extends Activity {
 
             @Override
             public void onLoaded(ImageView imageView, Drawable loadedDrawable, String url,
-                    boolean loadedFromCache, boolean error) {
+                                 boolean loadedFromCache, boolean error) {
 
                 final int relativeIndex = index % 4;
                 if (!error) {
@@ -296,7 +272,7 @@ public class WallpaperActivity extends Activity {
                             new ThumbnailClickListener(wall));
                 }
                 getThumbView(relativeIndex).setVisibility(View.VISIBLE);
-                
+
                 if (relativeIndex == 3)
                     getNextButton().setEnabled(true);
             }
