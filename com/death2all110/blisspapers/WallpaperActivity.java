@@ -8,16 +8,15 @@ import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.widget.ImageButton;
-import android.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +24,12 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.gesture.Gesture;
+import android.gesture.GestureLibraries;
+import android.gesture.GestureLibrary;
+import android.gesture.GestureOverlayView;
+import android.gesture.GestureOverlayView.OnGesturePerformedListener;
+import android.gesture.Prediction;
 
 import com.koushikdutta.urlimageviewhelper.UrlImageViewCallback;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
@@ -113,8 +118,9 @@ public class WallpaperActivity extends Activity {
     }
 
 
-    public static class WallpaperPreviewFragment extends Fragment {
+    public static class WallpaperPreviewFragment extends Fragment implements OnGesturePerformedListener {
 
+        private GestureLibrary gestureLib;
         static final String TAG = "PreviewFragment";
         WallpaperActivity mActivity;
         View mView;
@@ -145,8 +151,19 @@ public class WallpaperActivity extends Activity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
 
+            GestureOverlayView gestureOverlayView = new GestureOverlayView(getActivity());
+
             mView = inflater.inflate(com.death2all110.blisspapers.R.layout.activity_wallpaper, container, false);
 
+            //gestureOverlayView.addView(mView);
+                gestureOverlayView.addOnGesturePerformedListener(this);
+                gestureOverlayView.setGestureColor(Color.TRANSPARENT);
+                gestureOverlayView.setUncertainGestureColor(Color.TRANSPARENT);
+                gestureLib = GestureLibraries.fromRawResource(getActivity(), R.raw.gestures);
+                    if (!gestureLib.load()) {
+                        getActivity().finish();
+                    }
+                getActivity().setContentView(gestureOverlayView);
             back = (ImageButton) mView.findViewById(com.death2all110.blisspapers.R.id.backButton);
             next = (ImageButton) mView.findViewById(com.death2all110.blisspapers.R.id.nextButton);
             pageNum = (TextView) mView.findViewById(com.death2all110.blisspapers.R.id.textView1);
@@ -174,6 +191,22 @@ public class WallpaperActivity extends Activity {
 
             return mView;
 
+        }
+
+        //react to left and right swipes
+        public void onGesturePerformed(GestureOverlayView overlay, Gesture gesture) {
+            ArrayList<Prediction> predictions = gestureLib.recognize(gesture);
+            for (Prediction prediction : predictions) {
+                if (prediction.score > 1.0) {
+                    String gName = prediction.name;
+                    Log.i(TAG, gName);
+                    if (gName.equals("gesture_left")) {
+                        next();
+                    } else if (gName.equals("gesture_right")) {
+                        previous();
+                    }
+                }
+            }
         }
 
         public ArrayList<WallpaperCategory> getCategories() {
