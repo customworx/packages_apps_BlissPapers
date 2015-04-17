@@ -1,15 +1,21 @@
 <resources>
 
     <style name="Theme.Bliss" parent="android:Theme.Material">
-
-    <item name="android:windowNoTitle">false</item>
-    <!-- Main theme colors -->
-    <!--   your app branding color for the app bar -->
-    <item name="android:colorPrimary">@color/primary</item>
-    <!--   darker variant for the status bar and contextual app bars -->
-    <item name="android:colorPrimaryDark">@color/primary_dark</item>
-    <!--   theme UI controls like checkboxes and text fields -->
-    <item name="android:colorAccent">@color/accent</item>
+        <item name="android:windowNoTitle">false</item>
+        <!-- Main theme colors -->
+        <!--   your app branding color for the app bar -->
+        <item name="android:colorPrimary">@color/primary</item>
+        <!--   darker variant for the status bar and contextual app bars -->
+        <item name="android:colorPrimaryDark">@color/primary_dark</item>
+        <!--   theme UI controls like checkboxes and text fields -->
+        <item name="android:colorAccent">@color/accent</item>
+        <item name="android:alertDialogTheme">@style/Theme.Bliss.Dialog</item>
     </style>
 
+    <style name="Theme.Bliss.Dialog" parent="android:Theme.Material.Dialog.Alert">
+        <item name="android:colorPrimary">@color/primary</item>
+        <item name="android:colorPrimaryDark">@color/primary_dark</item>
+        <item name="android:colorAccent">@color/accent</item>
+        <item name="android:buttonStyle">@color/accent</item>
+    </style>
 </resources>

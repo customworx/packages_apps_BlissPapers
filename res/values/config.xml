@@ -7,7 +7,11 @@
     <!-- Directory to download wallpapers to on external storage. Leave blank for "/sdcard/" -->
     <string name="config_wallpaper_download_loc"></string>
 
-    <!-- url to the wallpaper manifest -->
-    <string name="config_wallpaper_manifest_url">http://darkxshadows.net/blisspop/wallpapers/wallpaper_manifest.xml</string>
+    <!-- url to the old wallpaper manifest -->
+    <!--<string name="config_wallpaper_manifest_url">http://darkxshadows.net/blisspop/wallpapers/wallpaper_manifest.xml</string>-->
+
+    <!-- url to the new wallpaper manifest-->
+    <string name="config_wallpaper_manifest_url">http://downloads.blissroms.com/BlissPapers/wallpaper_manifest.xml</string>
+
 
 </resources>

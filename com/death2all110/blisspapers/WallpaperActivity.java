@@ -2,22 +2,25 @@
 package com.death2all110.blisspapers;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.ContextThemeWrapper;
+import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +28,12 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+/*import android.gesture.Gesture;
+import android.gesture.GestureLibraries;
+import android.gesture.GestureLibrary;
+import android.gesture.GestureOverlayView;
+import android.gesture.GestureOverlayView.OnGesturePerformedListener;
+import android.gesture.Prediction;*/
 
 import com.koushikdutta.urlimageviewhelper.UrlImageViewCallback;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
@@ -36,6 +45,8 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class WallpaperActivity extends Activity {
 
@@ -71,10 +82,38 @@ public class WallpaperActivity extends Activity {
         mLoadingDialog.setIndeterminate(true);
         mLoadingDialog.setMessage("Retreiving wallpapers from server...");
 
-        mLoadingDialog.show();
-        new LoadWallpaperManifest().execute();
+        AlertDialog.Builder infoDialog = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.Theme_Bliss_Dialog));
+        infoDialog.setMessage("Hey there! Check back periodically for new wallpapers!");
+        infoDialog.setCancelable(false);
+        infoDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                mLoadingDialog.show();
+                new LoadWallpaperManifest().execute();
+            }
+        });
+        //infoDialog.create().show();
+
+        //Change color of 'OK' button
+        final AlertDialog infoDlg = infoDialog.create();
+        infoDlg.show();
+        Button pbutton = infoDlg.getButton(DialogInterface.BUTTON_POSITIVE);
+        pbutton.setTextColor(getResources().getColor(R.color.accent));
+        //end
+
+        //((AlertDialog) getDialog()).getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED);
+
+        //mLoadingDialog.show();
+        //new LoadWallpaperManifest().execute();
 
         UrlImageViewHelper.setErrorDrawable(getResources().getDrawable(com.death2all110.blisspapers.R.drawable.ic_error));
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
 
     }
 
@@ -113,8 +152,11 @@ public class WallpaperActivity extends Activity {
     }
 
 
+    //Disable Gestures 04142015 - death2all110
+    //public static class WallpaperPreviewFragment extends Fragment implements OnGesturePerformedListener {
     public static class WallpaperPreviewFragment extends Fragment {
 
+        //private GestureLibrary gestureLib;
         static final String TAG = "PreviewFragment";
         WallpaperActivity mActivity;
         View mView;
@@ -144,9 +186,21 @@ public class WallpaperActivity extends Activity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
+            //Disable Gestures 04142015 - death2all110
+            //GestureOverlayView gestureOverlayView = new GestureOverlayView(getActivity());
 
             mView = inflater.inflate(com.death2all110.blisspapers.R.layout.activity_wallpaper, container, false);
-
+            /*Disable Gestures 04142015 - death2all110
+            //gestureOverlayView.addView(mView);
+                gestureOverlayView.addOnGesturePerformedListener(this);
+                gestureOverlayView.setGestureColor(Color.TRANSPARENT);
+                gestureOverlayView.setUncertainGestureColor(Color.TRANSPARENT);
+                gestureLib = GestureLibraries.fromRawResource(getActivity(), R.raw.gestures);
+                    if (!gestureLib.load()) {
+                        getActivity().finish();
+                    }
+                getActivity().setContentView(gestureOverlayView);
+            */
             back = (ImageButton) mView.findViewById(com.death2all110.blisspapers.R.id.backButton);
             next = (ImageButton) mView.findViewById(com.death2all110.blisspapers.R.id.nextButton);
             pageNum = (TextView) mView.findViewById(com.death2all110.blisspapers.R.id.textView1);
@@ -175,6 +229,23 @@ public class WallpaperActivity extends Activity {
             return mView;
 
         }
+
+        /*Disable Gestures 04142015 - death2all110
+        //react to left and right swipes
+        public void onGesturePerformed(GestureOverlayView overlay, Gesture gesture) {
+            ArrayList<Prediction> predictions = gestureLib.recognize(gesture);
+            for (Prediction prediction : predictions) {
+                if (prediction.score > 1.0) {
+                    String gName = prediction.name;
+                    Log.i(TAG, gName);
+                    if (gName.equals("gesture_left")) {
+                        next();
+                    } else if (gName.equals("gesture_right")) {
+                        previous();
+                    }
+                }
+            }
+        }*/
 
         public ArrayList<WallpaperCategory> getCategories() {
             return mActivity.categories;
